@@ -3,20 +3,15 @@ import { fontSize, spacing } from '../screen/constants/dimensions';
 import { fontFamily } from '../screen/constants/fonts';
 import { colors } from '../screen/constants/colors';
 import { category } from '../data/category';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 
-const Category = () =>  {
-  //State management
-  const [selectedCategory, setSelectedCategory] = useState("Smart Watch");
+const Category = ({ selectedCategory, handleUpdateCategory }) =>  {
 
-  const handleSelectCategory = (category) => {
-    setSelectedCategory(category);
-  };
     return (
       <FlatList data={category} renderItem={({item, index}) => (
         <TouchableOpacity onPress={() => {
-          handleSelectCategory(item.name);
+          handleUpdateCategory(item.name);
         }}>
         <Text style={[styles.categoryText, selectedCategory === item.name && {color: colors.purple,},]}>{item.name}</Text>
         {/* borderBottom for select category */}

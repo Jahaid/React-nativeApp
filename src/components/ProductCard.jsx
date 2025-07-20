@@ -2,13 +2,19 @@ import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { colors } from '../screen/constants/colors';
 import { fontSize, spacing } from '../screen/constants/dimensions';
 import { fontFamily } from '../screen/constants/fonts';
+import {useNavigation} from "@react-navigation/native";
 
 
 
 // const imageUrl = "https://media-ik.croma.com/prod/https://media.tatacroma.com/Croma%20Assets/Communication/Wearable%20Devices/Images/309326_0_id9ty6.png";
 const ProductCard = ({item}) => {
+  const navigation = useNavigation();
+  const handleProductDetailsScreen = () => {
+    navigation.navigate("PRODUCT_DETAILS", {item});
+  };
     return (
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity style={styles.container}
+      onPress={handleProductDetailsScreen}>
         <View style={styles.imageWrapper}>
             <Image source={{uri: item.image}}style={styles.productImage} />
         </View>

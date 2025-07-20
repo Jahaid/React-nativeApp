@@ -11,9 +11,27 @@ import { colors } from './constants/colors';
 import { fontFamily } from './constants/fonts';
 import Category from '../components/Category';
 import ProductCard from '../components/ProductCard';
+import { headphones } from '../data/headphones';
 import { smartWatch } from '../data/smartwatch';
+import { useState } from 'react';
 
 const HomeScreen = () => {
+     //State management
+  const [data, setData] = useState(smartWatch);
+  const [selectedCategory, setSelectedCategory] = useState("Smart Watch");
+
+  const handleUpdateCategory = (newCategory) => {
+    // console.log("newCategory: ", newCategory);
+    
+    if(newCategory === "Smart Watch") {
+      setSelectedCategory("Smart Watch");
+      setData(smartWatch);
+    } else if (newCategory === "Headphones") {
+      setSelectedCategory("Headphones");
+      setData(headphones);
+    }
+    setSelectedCategory(newCategory);
+  };
   return (
     <View style={styles.container}>
       <FlatList
@@ -43,10 +61,13 @@ const HomeScreen = () => {
                 />
               </View>
             </View>
-            <Category />
+            <Category 
+            selectedCategory={selectedCategory}
+            handleUpdateCategory={handleUpdateCategory} 
+            />
           </>
         }
-        data={smartWatch}
+        data={data}
         renderItem={({ item, index }) => <ProductCard item={item} />}
         numColumns={2}
         columnWrapperStyle={{
